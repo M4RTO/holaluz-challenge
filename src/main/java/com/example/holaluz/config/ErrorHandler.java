@@ -1,6 +1,7 @@
 package com.example.holaluz.config;
 
 import com.example.holaluz.exception.NotFileExtensionException;
+import com.example.holaluz.exception.NotFoundSuspiciousException;
 import com.example.holaluz.exception.ParserCSVException;
 import com.example.holaluz.exception.ParserXMLException;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -67,6 +68,17 @@ public class ErrorHandler {
 
     @ExceptionHandler(MultipartException.class)
     private ResponseEntity<ApiErrorResponse> handleMultipartException(Throwable ex) {
+        log.error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), ex);
+        ApiErrorResponse apiErrorResponse =  new ApiErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                LocalDateTime.now(UTC_ZONE),
+                ex.getMessage());
+        return new ResponseEntity<>(apiErrorResponse, HttpStatus.NOT_FOUND);
+
+    }
+
+    @ExceptionHandler(NotFoundSuspiciousException.class)
+    private ResponseEntity<ApiErrorResponse> handleNotFoundSuspiciousException(Throwable ex) {
         log.error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), ex);
         ApiErrorResponse apiErrorResponse =  new ApiErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,

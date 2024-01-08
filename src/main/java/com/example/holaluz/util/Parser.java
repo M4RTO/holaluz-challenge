@@ -17,8 +17,7 @@ import java.io.*;
 import java.util.List;
 import java.util.Objects;
 
-import static com.example.holaluz.config.ErrorCode.INTERNAL_ERROR_FILE_CONVERTER;
-import static com.example.holaluz.config.ErrorCode.INTERNAL_ERROR_XML_PARSER;
+import static com.example.holaluz.config.ErrorCode.*;
 
 @Slf4j
 public class Parser {
@@ -35,7 +34,7 @@ public class Parser {
             log.info("result of parseXML: {} ", allReadings.getReadings());
             return allReadings.getReadings();
         } catch (JAXBException e) {
-            throw new ParserXMLException(INTERNAL_ERROR_XML_PARSER.name());
+            throw new ParserXMLException(INTERNAL_ERROR_XML_PARSER);
         }
     }
 
@@ -51,7 +50,7 @@ public class Parser {
             readings = (List<Reading>) csvToBean.parse();
         } catch (Exception ex ) {
             log.error("error parsing csv file {} ", ex);
-            throw new ParserCSVException(ex.getCause().getMessage());
+            throw new ParserCSVException(INTERNAL_ERROR_CSV_PARSER);
         }
         return readings;
     }
@@ -64,7 +63,7 @@ public class Parser {
             fos.write(file.getBytes());
             fos.close();
         } catch (IOException e) {
-            throw new FileConverterException(INTERNAL_ERROR_FILE_CONVERTER.name());
+            throw new FileConverterException(INTERNAL_ERROR_FILE_CONVERTER);
         }
 
         return convFile;

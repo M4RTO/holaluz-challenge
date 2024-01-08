@@ -3,6 +3,7 @@ package com.example.holaluz.adapter.jpa;
 import com.example.holaluz.adapter.jpa.model.SuspiciousEntity;
 import com.example.holaluz.application.port.out.SuspiciousPortOut;
 import com.example.holaluz.domain.Reading;
+import com.example.holaluz.domain.SuspiciousDomain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,12 @@ public class SuspiciousAdapter implements SuspiciousPortOut {
         log.info("save all suspicious");
         List<SuspiciousEntity> entityList = SuspiciousEntity.toEntity(suspicious, median);
         repository.saveAll(entityList);
+    }
+
+    @Override
+    public List<SuspiciousDomain> getSuspiciousById(String id) {
+        List<SuspiciousEntity> suspiciousEntities = repository.findByClient(id);
+        return SuspiciousEntity.toDomain(suspiciousEntities);
     }
 
 

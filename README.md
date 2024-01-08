@@ -16,6 +16,12 @@ curl --location 'localhost:8080/api/v1/frauds' \
 ```
 
 
+Then with this CURL or postman send http GET request and find a fraud with client id:
+```
+curl --location 'localhost:8080/api/v1/frauds/{client_id}```
+```
+And respond with a pdf result.
+
 This url you can show de DB to see the suspicious readings:
 
 ```

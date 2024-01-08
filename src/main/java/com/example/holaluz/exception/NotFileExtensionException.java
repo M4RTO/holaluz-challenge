@@ -1,8 +1,10 @@
 package com.example.holaluz.exception;
 
-public class NotFileExtensionException extends RuntimeException {
+import com.example.holaluz.config.ErrorCode;
 
-    public NotFileExtensionException(String message) {
+public class NotFileExtensionException extends GenericException {
+
+    public NotFileExtensionException(ErrorCode message) {
         super(message);
     }
 

@@ -1,8 +1,10 @@
 package com.example.holaluz.exception;
 
-public class ParserXMLException extends RuntimeException {
+import com.example.holaluz.config.ErrorCode;
 
-    public ParserXMLException(String message) {
+public class ParserXMLException extends GenericException {
+
+    public ParserXMLException(ErrorCode message) {
         super(message);
     }
 

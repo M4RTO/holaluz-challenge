@@ -1,8 +1,10 @@
 package com.example.holaluz.exception;
 
-public class ParserCSVException extends RuntimeException {
+import com.example.holaluz.config.ErrorCode;
 
-    public ParserCSVException(String message) {
+public class ParserCSVException extends GenericException {
+
+    public ParserCSVException(ErrorCode message) {
         super(message);
     }
 

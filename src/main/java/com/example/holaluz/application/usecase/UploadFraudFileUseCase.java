@@ -42,7 +42,7 @@ public class UploadFraudFileUseCase implements UploadFraudFilePortIn {
             readings = parseCSVtoDomain(file);
             log.info("those are the readings: {}", readings);
         } else {
-            throw new NotFileExtensionException(INTERNAL_ERROR_EXTENSION.name());
+            throw new NotFileExtensionException(INTERNAL_ERROR_EXTENSION);
         }
 
         Map<String, List<Reading>> groupByClient = readings.stream()

@@ -1,8 +1,10 @@
 package com.example.holaluz.exception;
 
-public class FileConverterException extends RuntimeException {
+import com.example.holaluz.config.ErrorCode;
 
-    public FileConverterException(String message) {
+public class FileConverterException extends GenericException {
+
+    public FileConverterException(ErrorCode message) {
         super(message);
     }
 
